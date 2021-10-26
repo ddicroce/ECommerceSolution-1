@@ -25,35 +25,21 @@ namespace ECommerceApiIntegrationTests.OrdersResource
         [Fact]
         public async Task Gets201StatusCode()
         {
-            var response = await _client.PostAsync("/orders", null);
+            var response = await _client.PostAsJsonAsync("/orders", OrdersTestData.ValidOrder);
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        }
+        [Fact(Skip ="Wait until after I add the other resource")]
+        public async Task HasLocationHeader()
+        {
+            // response should have a location header with the url to the new resource.
         }
         [Fact]
         public async Task HasCorrectContentTypeOnResponse()
         {
-            var sampleData = new OrderRequest
-            {
-                name = "Bob Smith",
-                address = "1212 Orange St",
-                city = "Akron",
-                state = "OH",
-                zip = "44319",
-                creditCardInfo = new Creditcardinfo
-                {
-                    number = "555-55-5555",
-                    expiration = "06/22",
-                    cvv2 = "973"
-                },
-                items = new List<Item>
-                {
-                    new Item { id="1", name="Beer", price=6.99M, qty=1}
-                }
+            
 
-
-            };
-
-            var response = await _client.PostAsJsonAsync("/orders", sampleData);
+            var response = await _client.PostAsJsonAsync("/orders", OrdersTestData.ValidOrder);
 
             Assert.Equal("application/json", response.Content.Headers.ContentType.MediaType);
         }

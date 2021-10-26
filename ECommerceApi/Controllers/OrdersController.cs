@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerceApi.Models.Orders;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,13 @@ namespace ECommerceApi.Controllers
     public class OrdersController : ControllerBase
     {
         [HttpPost("/orders")]
-        public async Task<ActionResult> PlaceOrder()
+        public async Task<ActionResult> PlaceOrder([FromBody] OrderPostRequest request)
         {
-            return StatusCode(201);
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            return StatusCode(201, new { });
         }
     }
 }
