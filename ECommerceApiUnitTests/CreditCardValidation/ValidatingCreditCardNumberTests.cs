@@ -29,6 +29,7 @@ namespace ECommerceApiUnitTests.CreditCardValidation
         [InlineData("4417 1234 5678 9123")]
         [InlineData("Dog")]
         [InlineData("1234piza")]
+        [InlineData("---- -- - ")]
         public void InvalidCreditCardNumbers(string ccNum)
         {
             var checker = new LuhnCheck();
