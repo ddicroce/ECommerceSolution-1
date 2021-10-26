@@ -1,18 +1,37 @@
-﻿using System;
+﻿using ECommerceApi.Models.Orders;
+using System.ComponentModel.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using ECommerceApi.Controllers;
+using ECommerceApi.Filters;
 
 namespace ECommerceApiUnitTests
 {
     public class OrderRequestValidationTests
     {
-        [Fact(Skip ="Do this later")]
+        [Fact()]
         public void OrderRequestHasTheCorrectValidationAttributes()
         {
-            // TODO: Learn some C# Reflection!
+            var maxLengthOnName = Helpers.GetPropertyAttributeValue<OrderPostRequest, string, MaxLengthAttribute, int>(p => p.Name, attr => attr.Length);
+            Assert.Equal(100, maxLengthOnName);
         }
+
+        [Fact]
+        public void OrderPostValidatesModel()
+        {
+            var method = typeof(OrdersController).GetMethods()
+                 .SingleOrDefault(x => x.Name == nameof(OrdersController.PlaceOrder));
+
+            var attribute = method?.GetCustomAttributes(typeof(ValidateModelAttribute), true)
+               .Single() as ValidateModelAttribute;
+
+            Assert.NotNull(attribute);
+        }
+
+        
     }
 }
