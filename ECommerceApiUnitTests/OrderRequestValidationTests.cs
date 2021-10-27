@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xunit;
 using ECommerceApi.Controllers;
 using ECommerceApi.Filters;
+using ECommerceApi.CustomValidators;
 
 namespace ECommerceApiUnitTests
 {
@@ -17,7 +18,10 @@ namespace ECommerceApiUnitTests
         public void OrderRequestHasTheCorrectValidationAttributes()
         {
             var maxLengthOnName = Helpers.GetPropertyAttributeValue<OrderPostRequest, string, MaxLengthAttribute, int>(p => p.Name, attr => attr.Length);
+
             Assert.Equal(100, maxLengthOnName);
+            Assert.True(Helpers.HasAttribute<OrderPostRequest, RequiredAttribute>(c => c.Name));
+            Assert.True(Helpers.HasAttribute<Creditcardinfo, CreditCardLuhnCheckAttribute>(c => c.Number));
         }
 
         [Fact]
