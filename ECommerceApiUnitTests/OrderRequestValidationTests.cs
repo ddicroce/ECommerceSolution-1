@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xunit;
 using ECommerceApi.Controllers;
 using ECommerceApi.Filters;
+using ECommerceApi.CustomValidators;
 
 namespace ECommerceApiUnitTests
 {
@@ -20,7 +21,7 @@ namespace ECommerceApiUnitTests
 
             Assert.Equal(100, maxLengthOnName);
             Assert.True(Helpers.HasAttribute<OrderPostRequest, RequiredAttribute>(c => c.Name));
-
+            Assert.True(Helpers.HasAttribute<Creditcardinfo, CreditCardLuhnCheckAttribute>(c => c.Number));
         }
 
         [Fact]

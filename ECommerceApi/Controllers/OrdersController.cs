@@ -1,4 +1,5 @@
-﻿using ECommerceApi.Filters;
+﻿using ECommerceApi.CustomValidators;
+using ECommerceApi.Filters;
 using ECommerceApi.Models.Orders;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,7 +16,7 @@ namespace ECommerceApi.Controllers
         [ValidateModel]
         public async Task<ActionResult> PlaceOrder([FromBody] OrderPostRequest request)
         {
-           
+          
             return StatusCode(201, new { });
         }
     }
