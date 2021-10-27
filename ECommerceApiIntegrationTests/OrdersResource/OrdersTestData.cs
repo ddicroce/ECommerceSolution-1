@@ -18,7 +18,7 @@ namespace ECommerceApiIntegrationTests.OrdersResource
             zip = "44319",
             creditCardInfo = new Creditcardinfo
             {
-                number = "4417-1234-5678-9113",
+                number = "4417-1234-5678-",
                 expiration = "06/22",
                 cvv2 = "973"
             },

@@ -11,7 +11,7 @@ namespace ECommerceApi.CustomValidators
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var luhnCheck = new LuhnCheck();
-            if(luhnCheck.Passes   Luhn    Check(value.ToString()))
+            if(luhnCheck.PassesLuhnCheck(value.ToString()))
             {
                 return ValidationResult.Success;
             } else
